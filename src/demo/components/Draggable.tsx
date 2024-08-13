@@ -114,7 +114,7 @@ const Draggable = ({ show, events, withEventStream, outsideEventHandlers, defaul
           />
           <label htmlFor="checkbox">Event Stream</label>
         </div>
-        <section className="flex flex-col text-left w-full h-[100px] relative p-2 shadow-[0_0_15px_0_rgba(0,0,0,0.2)_inset] overflow-y-scroll">
+        <section className="flex flex-col text-left w-full h-[100px] relative p-2 overflow-y-scroll">
           {withEventStream && events.map((event, index) => <div className='bg-slate-300 p-1 m-1' key={index}>{event}</div>)}
         </section>
         <section className="flex flex-col gap-2 mt-4">

@@ -16,7 +16,6 @@
 
 .swipe-card__container {
   position: absolute;
-  overflow: hidden;
   pointer-events: none;
   top: 0;
   left: 0;
@@ -29,17 +28,16 @@
   gap: 10px;
   cursor: grab;
   user-select: none;
-  transform: scale(0.95) translateY(30px);
+  transform: scale(0.95) translateY(25px);
   transition: all 0.5s;
 }
 
-.swipe-card__container:first-of-type {
-  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2));
+.swipe-card__container.active {
+  transform: scale(0.95) translateY(30px);
 }
 
 .swipe-card__container:last-of-type {
   pointer-events: auto;
-  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2));
   transform: scale(1) translateY(0px);
 }
 
@@ -70,21 +68,18 @@
   padding-inline: 0.5rem;
   border-radius: 0.375rem;
   transition: all 0.4s;
-  box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.25);
 }
 
 .swipe-card__ribbon-like {
   left: 2rem;
   background-color: #4ade80;
   transform: rotate(-20deg);
-  text-shadow: -2px 0px 1px rgba(0, 0, 0, 0.2);
 }
 
 .swipe-card__ribbon-dislike {
   right: 2rem;
   background-color: #f87171;
   transform: rotate(20deg);
-  text-shadow: 2px 0px 1px rgba(0, 0, 0, 0.2);
 }
 
 .swipe-card__ribbon-like.show,
@@ -108,7 +103,7 @@
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  transition: all .7s ease;
+  transition: all 0.7s ease;
   opacity: 1;
 }
 
@@ -125,7 +120,6 @@
   text-align: center;
   border-radius: 50%;
   padding: 10px;
-  box-shadow: 0 0 10px rgba(71, 71, 71, 0.2);
   cursor: pointer;
 }
 
@@ -143,10 +137,4 @@
 .swipe-card__empty-state.swipe-card__empty-state.show-empty-state {
   transform: scale(1);
   opacity: 1;
-}
-
-@media (max-height: 750px) {
-  .swipe-card__container {
-    transform: scale(0.95) translateY(25px);
-  }
 }

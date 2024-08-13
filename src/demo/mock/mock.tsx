@@ -6,6 +6,7 @@ import Spotify from '../../assets/images/spotify.png';
 
 import { CardData } from "../../lib";
 import Content from "../components/Content";
+import React from "react";
 
 export const mockData: CardData[] = [
   {
