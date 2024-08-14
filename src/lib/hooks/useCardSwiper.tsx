@@ -4,7 +4,6 @@ import {
   CardEnterEvent,
   CardEvents,
   CardId,
-  CardMetaData,
   SwipeAction,
   SwipeDirection,
   SwipeOperation,
@@ -21,9 +20,9 @@ export const useCardSwiper = ({ onDismiss, onFinish, onEnter, data }: UseCardSwi
   const [dynamicData, setDynamicData] = useState(data)
   const [isFinish, setIsFinish] = useState(false)
 
-  const handleNewCardSwiper = (ref: HTMLDivElement | null, id: CardId, meta: CardMetaData) => {
+  const handleNewCardSwiper = (ref: HTMLDivElement | null, id: CardId) => {
     if (ref) {
-      const currentSwiper = new Swiper({ element: ref, id, meta, onDismiss: handleDismiss })
+      const currentSwiper = new Swiper({ element: ref, id, onDismiss: handleDismiss })
       swiperElements.current.push(currentSwiper)
     }
   }
@@ -34,13 +33,12 @@ export const useCardSwiper = ({ onDismiss, onFinish, onEnter, data }: UseCardSwi
 
   const handleDismiss = (
     element: HTMLDivElement,
-    meta: CardMetaData,
     id: CardId,
     action: SwipeAction,
     operation: SwipeOperation,
   ) => {
     setSwiperIndex((prev) => prev - 1)
-    onDismiss && onDismiss(element, meta, id, action, operation)
+    onDismiss && onDismiss(element, id, action, operation)
     swiperElements.current.pop()
   }
 

@@ -27,8 +27,8 @@ export default function App() {
     }
   }, [defaultActionButtons])
 
-  const handleSwipe: CardEvent = (_el, meta, id, action, operation) => {
-    setEvents((prev) => [...prev, `- ID: ${id}, Action: ${action}, Operation: ${operation}, Callback: ${JSON.stringify(meta)}}`])
+  const handleSwipe: CardEvent = (_el, id, action, operation) => {
+    setEvents((prev) => [...prev, `- ID: ${id}, Action: ${action}, Operation: ${operation}`])
   }
 
   const handleFinish = (status: SwipeAction) => {
@@ -38,43 +38,44 @@ export default function App() {
   return (
     <main className="flex h-full w-full">
       <section className="flex flex-col items-center justify-center h-full w-full overflow-hidden">
+        <div className="w-[450px] h-[450px]">
 
-        <CardSwiper
-          data={mockData}
-          onFinish={handleFinish}
-          onDismiss={handleSwipe}
-          withActionButtons={withActionButtons}
-          dislikeButton={leftActionButton}
-          likeButton={rightActionButton}
-          withRibbons
-          likeRibbonText="INSTALL"
-          dislikeRibbonText="PASS"
-          ribbonColors={{ bgLike: '#4ade80', bgDislike: '#f87171', textColor: 'white' }}
-          emptyState={
-            <div className="flex flex-col align-center justify-center text-center text-neutral-400 gap-4">
-              <img width={250} src={EmptyState} />
-              <p className="leading-5">
-                You've reached the <br /> end of the list
-              </p>
-            </div>
-          }
-        />
-        <div className='p-6'>
-          <button className="bottom-4 hover:bg-blue-400 right-4 bg-blue-600 text-white rounded-md p-2" onClick={() => setShow((prev) => !prev)}>
-            {show ? 'Hide' : 'Show'} Draggable Toolbox
-          </button>
+          <CardSwiper
+            data={mockData}
+            onFinish={handleFinish}
+            onDismiss={handleSwipe}
+            withActionButtons={withActionButtons}
+            dislikeButton={leftActionButton}
+            likeButton={rightActionButton}
+            withRibbons
+            aprovalRibbon={<button>Pass</button>}
+            denialRibbon={<button>Deny</button>}
+            emptyState={
+              <div className="flex flex-col align-center justify-center text-center text-neutral-400 gap-4">
+                <img width={250} src={EmptyState} />
+                <p className="leading-5">
+                  You've reached the <br /> end of the list
+                </p>
+              </div>
+            }
+          />
+          <div className='p-6'>
+            <button className="bottom-4 hover:bg-blue-400 right-4 bg-blue-600 text-white rounded-md p-2" onClick={() => setShow((prev) => !prev)}>
+              {show ? 'Hide' : 'Show'} Draggable Toolbox
+            </button>
+          </div>
+          <Draggable
+            show={show}
+            setShow={setShow}
+            defaultActionButtons={defaultActionButtons}
+            events={events}
+            outsideEventHandlers={outsideEventHandlers}
+            setOutsideEventHandlers={setOutsideEventHandlers}
+            setWithEventStream={setWithEventStream}
+            setWithActionButtons={setWithActionButtons}
+            withEventStream={withEventStream}
+            setDefaultActionButtons={setDefaultActionButtons} />
         </div>
-        <Draggable
-          show={show}
-          setShow={setShow}
-          defaultActionButtons={defaultActionButtons}
-          events={events}
-          outsideEventHandlers={outsideEventHandlers}
-          setOutsideEventHandlers={setOutsideEventHandlers}
-          setWithEventStream={setWithEventStream}
-          setWithActionButtons={setWithActionButtons}
-          withEventStream={withEventStream}
-          setDefaultActionButtons={setDefaultActionButtons} />
       </section>
     </main>
   )

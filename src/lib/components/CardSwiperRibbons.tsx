@@ -1,29 +1,17 @@
+import React from "react"
 interface CardSwiperRibbonsProps {
-  ribbonColors?: {
-    bgLike?: string
-    bgDislike?: string
-    textColor?: string
-  }
-  likeRibbonText?: string
-  dislikeRibbonText?: string
+  aprovalRibbon?: React.JSX.Element
+  denialRibbon?: React.JSX.Element
 }
 
-function CardSwiperRibbons({ ribbonColors, dislikeRibbonText, likeRibbonText }: CardSwiperRibbonsProps) {
+function CardSwiperRibbons({ denialRibbon, aprovalRibbon }: CardSwiperRibbonsProps) {
   return (
     <div className="swipe-card__ribbons-container" id="swipe-card__ribbons-container">
-      <div
-        id="swipe-card__ribbon-like"
-        className="swipe-card__ribbon-like"
-        style={{ color: ribbonColors?.textColor, backgroundColor: ribbonColors?.bgLike }}
-      >
-        {likeRibbonText || 'LIKE'}
+      <div className="swipe-card__ribbon-like">
+        {aprovalRibbon}
       </div>
-      <div
-        id="swipe-card__ribbon-dislike"
-        className="swipe-card__ribbon-dislike"
-        style={{ color: ribbonColors?.textColor, backgroundColor: ribbonColors?.bgDislike }}
-      >
-        {dislikeRibbonText || 'PASS'}
+      <div className="swipe-card__ribbon-dislike">
+        {denialRibbon}
       </div>
     </div>
   )

@@ -1,20 +1,25 @@
 export interface SwiperProps extends CardEvents {
   id: CardId
-  meta: CardMetaData
   element: HTMLDivElement
 }
 
-export interface CardSwiperProps extends CardEvents {
-  data: CardData[]
-  likeButton?: React.JSX.Element
-  dislikeButton?: React.JSX.Element
-  withActionButtons?: boolean
-  emptyState?: React.JSX.Element
-  withRibbons?: boolean
-  likeRibbonText?: string
-  dislikeRibbonText?: string
-  ribbonColors?: CardRibbonColors
+
+interface RequiredRibbons {
+  aprovalRibbon: React.JSX.Element;
+  denialRibbon: React.JSX.Element;
 }
+
+interface BaseCardSwiperProps extends CardEvents {
+  data: CardData[];
+  likeButton?: React.JSX.Element;
+  dislikeButton?: React.JSX.Element;
+  withActionButtons?: boolean;
+  emptyState?: React.JSX.Element;
+}
+
+export type CardSwiperProps =
+  | (BaseCardSwiperProps & { withRibbons: true } & RequiredRibbons)
+  | (BaseCardSwiperProps & { withRibbons?: false });
 
 export interface CardEvents {
   onFinish?: (status: SwipeAction.FINISHED) => void
@@ -24,17 +29,13 @@ export interface CardEvents {
 
 export interface CardData {
   id: CardId
-  src: string
-  meta: CardMetaData
-  header?: React.JSX.Element
-  content?: React.JSX.Element
+  content: React.JSX.Element
 }
 
 export type CardId = string | number
 export type CardEnterEvent = (element: HTMLDivElement, meta: CardMetaData, id: CardId) => void
 export type CardEvent = (
   element: HTMLDivElement,
-  meta: CardMetaData,
   id: CardId,
   action: SwipeAction,
   operation: SwipeOperation,

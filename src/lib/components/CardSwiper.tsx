@@ -32,23 +32,18 @@ export const CardSwiper = (props: CardSwiperProps) => {
 
   const CardComponents = useMemo(
     () =>
-      dynamicData.map(({ id, header, src, content, meta }) => (
+      dynamicData.map(({ id, content }) => (
         <div
           key={id}
-          ref={(ref) => handleNewCardSwiper(ref, id, meta)}
+          ref={(ref) => handleNewCardSwiper(ref, id,)}
           className="swipe-card__container"
           id="swipe-card__container "
         >
-          {header && (
-            <div className="swipe-card__header-container" id="swipe-card__header-container">
-              <h2 id="swipe-card__header">{header}</h2>
-            </div>
-          )}
+
           {props.withRibbons && (
             <CardSwiperRibbons
-              likeRibbonText={props.likeRibbonText}
-              dislikeRibbonText={props.dislikeRibbonText}
-              ribbonColors={props.ribbonColors}
+              aprovalRibbon={props.aprovalRibbon}
+              denialRibbon={props.denialRibbon}
             />
           )}
 
@@ -74,8 +69,8 @@ export const CardSwiper = (props: CardSwiperProps) => {
   }, [currentSwiper])
 
   return (
-    <div className="w-full h-full bg-blue">
-      <div className="swipe-card h-full" id="swipe-card">
+    <div className="">
+      <div className="swipe-card" id="swipe-card">
         <div className="swipe-card__cards" id="swipe-card__cards">
           {CardComponents}
           {emptyState && isFinish && <CardSwiperEmptyState children={emptyState} isFinish={isFinish} />}
